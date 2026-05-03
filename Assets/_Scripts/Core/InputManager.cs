@@ -23,6 +23,9 @@ public class InputManager : MonoBehaviour
     private InputAction cancelAction;
     private InputAction zoomAction;
 
+    private InputAction weaponNextAction;
+    private InputAction weaponPrevAction;
+
     // ÃÃ¥ÃªÃ³Ã¹Ã¨Ã¥ Ã§Ã­Ã Ã·Ã¥Ã­Ã¨Ã¿ (ÃªÃ½Ã¸Ã¨Ã°Ã³Ã¥Ã¬ Ã¤Ã«Ã¿ Ã¡Ã»Ã±Ã²Ã°Ã®Ã£Ã® Ã¤Ã®Ã±Ã²Ã³Ã¯Ã )
     public Vector2 MoveInput { get; private set; }
     public Vector2 LookInput { get; private set; }
@@ -39,6 +42,9 @@ public class InputManager : MonoBehaviour
     public System.Action OnInteractPressed;
     public System.Action OnPausePressed;
     public System.Action OnCancelPressed;
+
+    public System.Action OnWeaponNextPressed;
+    public System.Action OnWeaponPrevPressed;
 
     private void Awake()
     {
@@ -85,6 +91,9 @@ public class InputManager : MonoBehaviour
         crouchAction = playerActionMap.FindAction("Crouch");
         pauseAction = playerActionMap.FindAction("Pause");
         zoomAction = playerActionMap.FindAction("Zoom");
+        weaponNextAction = playerActionMap.FindAction("Next");
+        weaponPrevAction = playerActionMap.FindAction("Previous");
+
         if (uiActionMap != null)
             cancelAction = uiActionMap.FindAction("Cancel");
 
@@ -99,6 +108,10 @@ public class InputManager : MonoBehaviour
             pauseAction.performed += OnPausePerformed;
         if (cancelAction != null)
             cancelAction.performed += OnCancelPerformed;
+        if (weaponNextAction != null)
+            weaponNextAction.performed += OnWeaponNextPreformed;
+        if (weaponPrevAction != null)
+            weaponPrevAction.performed += OnWeaponPrevPreformed;
 
         // ÃÃªÃ«Ã¾Ã·Ã Ã¥Ã¬ Player Action Map Ã¯Ã® Ã³Ã¬Ã®Ã«Ã·Ã Ã­Ã¨Ã¾
         EnablePlayerInput();
@@ -145,6 +158,10 @@ public class InputManager : MonoBehaviour
             pauseAction.performed -= OnPausePerformed;
         if (cancelAction != null)
             cancelAction.performed -= OnCancelPerformed;
+        if (weaponNextAction != null)
+            weaponNextAction.performed -= OnWeaponNextPreformed;
+        if (weaponPrevAction != null)
+            weaponPrevAction.performed -= OnWeaponPrevPreformed;
     }
 
     private void Update()
@@ -193,6 +210,16 @@ public class InputManager : MonoBehaviour
     private void OnCancelPerformed(InputAction.CallbackContext context)
     {
         OnCancelPressed?.Invoke();
+    }
+
+    private void OnWeaponNextPreformed(InputAction.CallbackContext context)
+    {
+        OnWeaponNextPressed?.Invoke();
+    }
+
+    private void OnWeaponPrevPreformed(InputAction.CallbackContext context)
+    {
+        OnWeaponPrevPressed?.Invoke();
     }
 
 

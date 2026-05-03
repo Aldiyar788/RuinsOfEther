@@ -164,7 +164,7 @@ public class PlayerController : MonoBehaviour
                 jumpForce = playerStats.playerData.jumpForce;
             }
 
-            verticalVelocity.y = Mathf.Sqrt(jumpForce * -2f * gravity);
+            verticalVelocity.y = Mathf.Sqrt(jumpForce * -1f * gravity);
         }
     }
 }
