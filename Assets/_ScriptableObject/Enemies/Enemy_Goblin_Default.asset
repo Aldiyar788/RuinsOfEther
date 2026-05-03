@@ -20,4 +20,4 @@ MonoBehaviour:
   attackRange: 2
   detectionRange: 10
   experienceReward: 10
-  prefab: {fileID: 0}
+  prefab: {fileID: 5633240754087740339, guid: 601733caed08df243b0ce664a569618a, type: 3}
