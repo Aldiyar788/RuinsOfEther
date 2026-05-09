@@ -57,6 +57,12 @@ public class PlayerController : MonoBehaviour
         if (InputManager.Instance == null)
             return;
 
+        if (playerStats != null && playerStats.IsDead)
+        {
+            InputManager.Instance.ResetButtonFlags();
+            return;
+        }
+
         HandleMovement();
         HandleJump();
 
@@ -164,7 +170,7 @@ public class PlayerController : MonoBehaviour
                 jumpForce = playerStats.playerData.jumpForce;
             }
 
-            verticalVelocity.y = Mathf.Sqrt(jumpForce * -1f * gravity);
+            verticalVelocity.y = Mathf.Sqrt(jumpForce * -2f * gravity);
         }
     }
 }
