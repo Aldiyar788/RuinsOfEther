@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6320e3e2928c0b4aa756904088c366c, type: 3}
   m_Name: PlayerData_Default
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 1000
   maxMana: 0
   moveSpeed: 5
   jumpForce: 5
