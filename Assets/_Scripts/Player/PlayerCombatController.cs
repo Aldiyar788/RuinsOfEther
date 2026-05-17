@@ -70,7 +70,10 @@ public class PlayerCombatController : MonoBehaviour
             Debug.Log($"{name}: атака запущена, тип анимации = {attackAnimationType}, ждём Animation Event.", this);
 
         PlayAttackStartEffects();
+
+        // Запускаем анимацию атаки через PlayerAnimationController
         playerAnimationController.PlayAttack(attackAnimationType);
+
         return true;
     }
 

@@ -26,9 +26,9 @@ public class PlayerAnimationController : MonoBehaviour
     [Tooltip("Статы игрока. Нужны, чтобы корректно реагировать на смерть и не обновлять лишние параметры после неё.")]
     [SerializeField] private PlayerStats playerStats;
 
-    [Header("Параметры Animator")]
-    [Tooltip("Имя float-параметра скорости движения в Animator Controller.")]
-    [SerializeField] private string moveSpeedParameter = "MoveSpeed";
+    //[Header("Параметры Animator")]
+    //[Tooltip("Имя float-параметра скорости движения в Animator Controller.")]
+    //[SerializeField] private string moveSpeedParameter = "MoveSpeed";
 
     [Tooltip("Имя trigger-параметра атаки в Animator Controller.")]
     [SerializeField] private string attackTriggerParameter = "Attack";
@@ -36,8 +36,8 @@ public class PlayerAnimationController : MonoBehaviour
     [Tooltip("Имя int-параметра типа атаки в Animator Controller. Через него Animator решает, какой attack-state запускать: melee или ranged.")]
     [SerializeField] private string attackTypeParameter = "AttackType";
 
-    [Tooltip("Имя bool-параметра смерти в Animator Controller.")]
-    [SerializeField] private string isDeadParameter = "IsDead";
+    //[Tooltip("Имя bool-параметра смерти в Animator Controller.")]
+    //[SerializeField] private string isDeadParameter = "IsDead";
 
     private void Awake()
     {
@@ -67,7 +67,7 @@ public class PlayerAnimationController : MonoBehaviour
 
         if (playerStats != null && playerStats.IsDead)
         {
-            animator.SetFloat(moveSpeedParameter, 0f);
+            //animator.SetFloat(moveSpeedParameter, 0f);
             return;
         }
 
@@ -78,7 +78,7 @@ public class PlayerAnimationController : MonoBehaviour
         // если игрок двигает стик/клавиши сильнее, MoveSpeed становится больше,
         // и Animator сам переключает Idle <-> Move по условиям переходов.
         float moveSpeed = InputManager.Instance.MoveInput.magnitude;
-        animator.SetFloat(moveSpeedParameter, moveSpeed);
+        //animator.SetFloat(moveSpeedParameter, moveSpeed);
     }
 
     /// <summary>
@@ -91,11 +91,13 @@ public class PlayerAnimationController : MonoBehaviour
         if (animator == null)
             return;
 
-        // Важно для вашей схемы Animator:
-        // AttackType решает, в какой state идти (Attack_Melee или Attack_Ranged),
-        // а trigger Attack отвечает только за сам факт запуска атаки.
+        // Устанавливаем тип атаки (ближняя или дальняя)
         animator.SetInteger(attackTypeParameter, (int)attackAnimationType);
+
+        // Сбрасываем триггер атаки, чтобы избежать конфликтов
         animator.ResetTrigger(attackTriggerParameter);
+
+        // Устанавливаем триггер атаки, чтобы запустить анимацию
         animator.SetTrigger(attackTriggerParameter);
     }
 
@@ -107,7 +109,7 @@ public class PlayerAnimationController : MonoBehaviour
         if (animator == null)
             return;
 
-        animator.SetBool(isDeadParameter, true);
+        //animator.SetBool(isDeadParameter, true);
     }
 
     private void HandleDeath()
