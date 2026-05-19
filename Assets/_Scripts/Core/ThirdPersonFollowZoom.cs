@@ -17,6 +17,7 @@ public class ThirdPersonFollowZoom : MonoBehaviour
 
         if (cmCamera != null)
             follow = cmCamera.GetCinemachineComponent(CinemachineCore.Stage.Body) as CinemachineThirdPersonFollow;
+
     }
 
     private void Update()
